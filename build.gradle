@@ -27,10 +27,40 @@ gradlePlugin {
 }
 
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: 'file://Users/vkaruri/.m2/repository/')
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name "OpenSRP Client Signing Plugin"
+                packaging jar
+                description "OpenSRP Client Signing Plugin"
+                url "https://github.com/OpenSRP/"
+
+                scm {
+                    url "https://github.com/OpenSRP/opensrp-client-native-form"
+                    connection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
+                    developerConnection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
+                }
+
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "opensrp"
+                        name "OpenSRP Onadev"
+                    }
+                }
+            }
+        }
+    }
+}
