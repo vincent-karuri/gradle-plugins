@@ -1,0 +1,45 @@
+group 'org.smartregister'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+    google()
+    jcenter()
+    maven { url 'https://maven.fabric.io/public' }
+    mavenLocal()
+}
+
+dependencies {
+    implementation localGroovy()
+    implementation group: 'org.json', name: 'json', version: '20180813'
+    implementation 'org.apache.commons:commons-lang3:3.2'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.1'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'org.smartregister.plugin.gradle.signing-plugin'
+            implementationClass = 'org.smartregister.plugin.gradle.SigningPlugin'
+        }
+    }
+}
+
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: 'file://Users/vkaruri/.m2/repository/')
+//        }
+//    }
+//}
